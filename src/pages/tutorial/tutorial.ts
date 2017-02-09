@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-
 import { MenuController, NavController } from 'ionic-angular';
-
 import { WelcomePage } from '../welcome/welcome';
-
 import { TranslateService } from 'ng2-translate/ng2-translate';
+
+import * as PouchDB from 'pouchdb';
+import * as CryptoPouch from 'crypto-pouch';
 
 
 
@@ -23,6 +23,26 @@ export class TutorialPage {
   showSkip = true;
 
   constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService) {
+    
+    PouchDB.plugin(CryptoPouch);
+    var db = new PouchDB('kittens');
+    var password = "password";
+
+    //db.crypto(password);
+
+    db.crypto(password).then(function () {
+      return db.put({_id: 'foo', bar: 'baz'});
+    }).then(function () {
+        return db.get('foo');
+    }).then(function (doc) {
+        console.log('decrypted', doc);
+        return db.removeCrypto();
+    }).then(function () {
+        return db.get('foo');
+    }).then(function (doc) {
+        console.log('encrypted', doc);
+    })
+
     translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
@@ -50,6 +70,7 @@ export class TutorialPage {
         }
       ];
     });
+
   }
 
   startApp() {

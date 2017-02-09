@@ -12,6 +12,66 @@ One of the big advances in Ionic 2 was moving from a rigid route-based navigatio
 
 _Note: the Ionic Super Starter requires Ionic CLI 2.1.18 or greater._
 
+## PouchDB & CryptoPouch
+
+This project includes [PouchDB](https://pouchdb.com) and [CryptoPouch]().
+After installing these and adding the test code for crypto-pouch usage, there was this error:
+```
+webpackMissingModule — index.js:12Error: Cannot find module "node-uuid"
+```
+
+Installing node-uuid solved the problem::
+```
+$ npm i node-uuid --save
+```
+
+The sample crypto-pouch usage can be found in the src/pages/tutorial/tutorial directory.
+The basic usage is this:
+```
+import * as PouchDB from 'pouchdb';
+import * as CryptoPouch from 'crypto-pouch';
+
+export class TutorialPage {
+  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService) {
+    
+    PouchDB.plugin(CryptoPouch);
+    var db = new PouchDB('kittens');
+    var password = "password";
+
+    db.crypto(password);
+
+    // db.crypto(password).then(function () {
+    //   return db.put({_id: 'foo', bar: 'baz'});
+    // }).then(function () {
+    //     return db.get('foo');
+    // }).then(function (doc) {
+    //     console.log('decrypted', doc);
+    //     return db.removeCrypto();
+    // }).then(function () {
+    //     return db.get('foo');
+    // }).then(function (doc) {
+    //     console.log('encrypted', doc);
+    // })
+```
+
+This code will run, but just doing ```db.crypto(password)``` apparently will do nothing.
+According to [this StackOverflow answer](http://stackoverflow.com/questions/35758553/how-to-encrypt-a-pouchdb-database),
+This is needed:
+```
+db.crypto(password).then(function () {
+   // <-- encryption set up
+})
+```
+
+
+However, trying this, for example by uncommenting the above commented out code will cause this runtime error:
+```
+EXCEPTION: Error in ./MyApp class MyApp - inline template:16:2 caused by: undefined is not an object (evaluating 'db.crypto(password).then')
+```
+
+Not sure why the first ```db.crypto(password)``` will work but the ```db.crypto(password).then``` will not.
+
+
 ## Table of Contents
 
 1. [Pages](#pages)
