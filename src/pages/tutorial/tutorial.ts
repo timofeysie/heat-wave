@@ -5,7 +5,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import * as PouchDB from 'pouchdb';
 import * as CryptoPouch from 'crypto-pouch';
-
+import * as PBKDF2 from 'crypto-js/pbkdf2';
 
 
 export interface Slide {
@@ -22,26 +22,33 @@ export class TutorialPage {
   slides: Slide[];
   showSkip = true;
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService) {
+  constructor(
+    public navCtrl: NavController, 
+    public menu: MenuController, 
+    translate: TranslateService) {
     
     PouchDB.plugin(CryptoPouch);
     var db = new PouchDB('kittens');
     var password = "password";
 
-    //db.crypto(password);
+    db.crypto(password);
+    // all done, docs should be transparently encrypted/decrypted
 
-    db.crypto(password).then(function () {
-      return db.put({_id: 'foo', bar: 'baz'});
-    }).then(function () {
-        return db.get('foo');
-    }).then(function (doc) {
-        console.log('decrypted', doc);
-        return db.removeCrypto();
-    }).then(function () {
-        return db.get('foo');
-    }).then(function (doc) {
-        console.log('encrypted', doc);
-    })
+    // [ts] Property 'pbkdf2' does not exist on type 'Crypto'.
+    // db.get('_local/crypto').then(function (doc) {
+    //   return new Promise(function (resolve, reject) {
+    //     crypto.pbkdf2(password, doc.salt, doc.iterations, 256/8, doc.digest, function (err, key) {
+    //       if (err) {
+    //         return reject(err);
+    //       }
+    //       resolve(key);
+    //     });
+    //   });
+    // }).then(function (key) {
+    //   console.log('you have the key',key);
+    // });
+
+
 
     translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
