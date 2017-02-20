@@ -3,10 +3,7 @@ import { MenuController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import * as PouchDB from 'pouchdb';
-import * as CryptoPouch from 'crypto-pouch';
-import * as PBKDF2 from 'crypto-js/pbkdf2';
-
+import { Wikidata } from 'socius';
 
 export interface Slide {
   title: string;
@@ -25,32 +22,11 @@ export class TutorialPage {
   constructor(
     public navCtrl: NavController, 
     public menu: MenuController, 
-    translate: TranslateService) {
-    
-    PouchDB.plugin(CryptoPouch);
-    var db = new PouchDB('kittens');
-    var password = "password";
+    translate: TranslateService,
+    public wikidata: Wikidata) {
+      
 
-    db.crypto(password);
-    // all done, docs should be transparently encrypted/decrypted
-
-    // [ts] Property 'pbkdf2' does not exist on type 'Crypto'.
-    // db.get('_local/crypto').then(function (doc) {
-    //   return new Promise(function (resolve, reject) {
-    //     crypto.pbkdf2(password, doc.salt, doc.iterations, 256/8, doc.digest, function (err, key) {
-    //       if (err) {
-    //         return reject(err);
-    //       }
-    //       resolve(key);
-    //     });
-    //   });
-    // }).then(function (key) {
-    //   console.log('you have the key',key);
-    // });
-
-
-
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
+      translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
                    "TUTORIAL_SLIDE2_DESCRIPTION",
