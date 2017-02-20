@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { MenuController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -16,6 +16,7 @@ export interface Slide {
   templateUrl: 'tutorial.html'
 })
 export class TutorialPage {
+  private wikidata: Wikidata;
   slides: Slide[];
   showSkip = true;
 
@@ -23,8 +24,11 @@ export class TutorialPage {
     public navCtrl: NavController, 
     public menu: MenuController, 
     translate: TranslateService,
-    public wikidata: Wikidata) {
+    injector:Injector) {
       
+      setTimeout(() => {
+        this.wikidata = injector.get(Wikidata);
+      });
 
       translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
