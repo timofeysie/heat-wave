@@ -3,7 +3,7 @@ import { MenuController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import { Wikidata } from 'socius';
+import { Wikidata } from 'socius/lib/providers/wikidata';
 
 export interface Slide {
   title: string;
@@ -25,6 +25,7 @@ export class TutorialPage {
     translate: TranslateService,
     wikidata: Wikidata) {
     
+      wikidata.getData('quadcopter');
       translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
