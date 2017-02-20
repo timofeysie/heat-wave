@@ -27,6 +27,8 @@ import { Items } from '../mocks/providers/items';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
+import * as socius from 'socius/lib'
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: Http) {
@@ -87,6 +89,7 @@ export function providers() {
     User,
     Api,
     Items,
+    socius.Wikidata,
 
     { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
     // Keep this to enable Ionic's runtime error handling during development
