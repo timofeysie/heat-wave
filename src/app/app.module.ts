@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -27,7 +27,7 @@ import { Items } from '../mocks/providers/items';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
-import * as socius from 'socius/lib'
+import * as socius from 'socius/lib/providers/wikidata'
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -90,6 +90,7 @@ export function providers() {
     Api,
     Items,
     socius.Wikidata,
+    Injectable,
 
     { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
     // Keep this to enable Ionic's runtime error handling during development

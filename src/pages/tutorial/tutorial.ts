@@ -16,7 +16,6 @@ export interface Slide {
   templateUrl: 'tutorial.html'
 })
 export class TutorialPage {
-  private wikidata: Wikidata;
   slides: Slide[];
   showSkip = true;
 
@@ -24,12 +23,8 @@ export class TutorialPage {
     public navCtrl: NavController, 
     public menu: MenuController, 
     translate: TranslateService,
-    injector:Injector) {
-      
-      setTimeout(() => {
-        this.wikidata = injector.get(Wikidata);
-      });
-
+    wikidata: Wikidata) {
+    
       translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
