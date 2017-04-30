@@ -1,4 +1,6 @@
 import { NgModule, ErrorHandler, Injectable } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -32,7 +34,7 @@ import { Wikidata } from 'socius/lib/providers/wikidata';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
+  return new TranslateStaticLoader(http, './assets/i18n', '.json'); 
 }
 
 export function provideSettings(storage: Storage) {
@@ -100,6 +102,8 @@ export function providers() {
 @NgModule({
   declarations: declarations(),
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
       provide: TranslateLoader,
