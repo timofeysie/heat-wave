@@ -26,6 +26,7 @@ export class TutorialPage {
     wikidata: Wikidata) {
     
       wikidata.getData('quadcopter');
+      
       translate.get(["TUTORIAL_SLIDE1_TITLE",
                    "TUTORIAL_SLIDE1_DESCRIPTION",
                    "TUTORIAL_SLIDE2_TITLE",
