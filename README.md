@@ -2,6 +2,56 @@
 
 <img src="super2.png" width="400" />
 
+## Initial Ionic settings
+
+When this project was first created with the PouchDB sample code, this is the result of running ```ionic info```:
+
+```
+Cordova CLI: 6.1.1
+Gulp version:  CLI version 1.2.2
+Gulp local:  
+Ionic Framework Version: 3.1.1
+Ionic CLI Version: 2.1.0
+Ionic App Lib Version: 2.1.0-beta.1
+ios-deploy version: Not installed
+ios-sim version: Not installed
+OS: Mac OS X Yosemite
+Node Version: v4.4.3
+Xcode version: Xcode 6.1.1 Build version 6A2008a 
+```
+
+This is before running:
+```
+npm uninstall -g ionic
+npm install -g ionic@latest
+```
+
+After this, we got this warning:
+```
+m$ ionic info
+ERR: Your Node.js version is v4.4.3. Please update to the latest Node 6 LTS version (or latest Node).
+```
+
+Easy to fix using the Node Version Manager:
+```
+QuinquenniumF:heat-wave tim$ nvm use 6
+Now using node v6.9.2 (npm v3.10.9)
+```
+
+The updated info afterwards:
+```
+Ionic Framework Version: 3.1.1
+Ionic CLI Version: 2.1.18
+Ionic App Lib Version: 2.1.9
+Ionic App Scripts Version: 1.3.6
+ios-deploy version: Not installed
+ios-sim version: Not installed
+OS: OS X Yosemite
+Node Version: v6.9.2
+Xcode version: Xcode 6.1.1 Build version 6A2008a
+```
+
+
 The Ionic Super Starter is a batteries-included starter project for Ionic 2.x apps complete with pre-built pages, providers, , and best practices for Ionic development.
 
 ## Update to Ionic 3.X
