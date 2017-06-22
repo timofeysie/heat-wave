@@ -4,6 +4,76 @@
 
 The Ionic Super Starter is a batteries-included starter project for Ionic 2.x apps complete with pre-built pages, providers, , and best practices for Ionic development.
 
+## Update to the latest super starter
+
+Creating a new super starter project from scratch to replace the current project has a problem.
+I started the dulpicate project in a different directory with the usual command:
+```
+ionic start heat-wave super
+```
+
+When running ```ionic serve```, there is only a blank starter UI and this console error:
+```
+:8100/css/style.css Failed to load resource: the server responded with a status of 404 (Not Found)
+```
+
+There is also a message in the terminal:
+```
+ Dependency warning - for the CLI to run correctly,      
+ it is highly recommended to install/upgrade the following:     
+ Please install your Cordova CLI to version  >=4.2.0 `npm install -g cordova`
+```
+
+Taking that advice.  Before the version info was: *Cordova CLI: 6.4.0*
+
+After running `npm install -g cordova` the version is: *Cordova CLI: 7.0.1*
+
+After this however, the build still will not create the style.css file.
+
+The message regarding upgrading Cordova is still there in the terminal:
+```
+$ ionic info
+******************************************************
+ Dependency warning - for the CLI to run correctly,      
+ it is highly recommended to install/upgrade the following:     
+ Please install your Cordova CLI to version  >=4.2.0 `npm install -g cordova`
+ Install ios-sim to deploy iOS applications.`npm install -g ios-sim` (may require sudo)
+ Install ios-deploy to deploy iOS applications to devices.  `npm install -g ios-deploy` (may require sudo)
+******************************************************
+Your system information:
+Cordova CLI:  You have been opted out of telemetry. To change this, run: cordova telemetry on.
+7.0.1
+Ionic CLI Version: 2.1.18
+Ionic App Lib Version: 2.1.9
+ios-deploy version: Not installed
+ios-sim version: Not installed
+OS: OS X Yosemite
+Node Version: v6.9.2
+Xcode version: Xcode 6.1.1 Build version 6A2008a
+******************************************************
+ Dependency warning - for the CLI to run correctly,      
+ it is highly recommended to install/upgrade the following:     
+
+ Please install your Cordova CLI to version  >=4.2.0 `npm install -g cordova`
+```
+
+Doing this takes almost a minute to complete:
+```
+$ cordova --version
+? May Cordova anonymously report usage statistics to improve the tool over time? Yes
+Thanks for opting into telemetry to help us improve cordova.
+7.0.1
+```
+
+The [Ionic forum poast](https://forum.ionicframework.com/t/main-js-main-css-giving-404-not-found-error-randomly-rc0/65239/16) details a long list of people who have had similar problems going back for some time.
+
+Since I have been able to run this project on various occasion, it seems like a tooling issue.
+
+This project still has the issue detailed [in this closed issue](https://github.com/driftyco/ionic-starter-super/issues/98).
+It is also [deailed here](https://github.com/ionic-team/ionic-starter-super/issues/102).
+
+I will test this project on verious systems to see if it can run and under what tooling versions.
+
 ## Update to Ionic 3.X
 Following the instructions on [this page](https://forum.ionicframework.com/t/guide-how-to-update-to-ionic-3-x/87516).
 
