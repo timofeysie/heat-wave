@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { Storage, IonicStorageModule } from '@ionic/storage' 
 
 import { MyApp } from './app.component';
 
@@ -86,8 +86,6 @@ export function entryComponents() {
 
 export function providers() {
   return [
-    Storage,
-
     User,
     Api,
     Items,
@@ -104,6 +102,7 @@ export function providers() {
   imports: [
     BrowserModule,
     HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
       provide: TranslateLoader,
