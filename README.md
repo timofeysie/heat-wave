@@ -74,6 +74,45 @@ It is also [deailed here](https://github.com/ionic-team/ionic-starter-super/issu
 
 I will test this project on verious systems to see if it can run and under what tooling versions.
 
+Trying to commit these changes resulted in the following 'conversation' with git:
+```
+$ git pull
+Merge made by the 'recursive' strategy.
+ package.json                   | 6 +++---
+ src/app/app.module.ts          | 5 ++---
+ src/pages/tutorial/tutorial.ts | 1 +
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+QuinquenniumF:heat-wave tim$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working directory clean
+QuinquenniumF:heat-wave tim$ npm i
+ionic-hello-world@ /Users/tim/angular/ionic/i2/heat-wave
+├── UNMET PEER DEPENDENCY @angular/animations@4.0.2
+├── UNMET PEER DEPENDENCY @angular/core@4.0.2
+├── UNMET PEER DEPENDENCY @angular/http@4.0.2
+└── @ionic/storage@2.0.0 
+
+npm WARN @angular/platform-server@4.0.2 requires a peer of @angular/animations@4.0.2 but none was installed.
+npm WARN ng2-translate@5.0.0 requires a peer of @angular/core@^2.0.0 but none was installed.
+npm WARN ng2-translate@5.0.0 requires a peer of @angular/http@^2.0.0 but none was installed.
+npm WARN @angular/core@2.0.2 requires a peer of zone.js@^0.6.21 but none was installed.
+```
+
+After this, the result of an ```ionic serve``` is a broken app and this error:
+```
+polyfills.js:3 Unhandled Promise rejection: Template parse errors:
+Can't bind to 'options' since it isn't a known property of 'ion-slides'.
+```
+
+Removing the ```[options]="{pager: true}"``` from the tutorial.html page and the app runs.
+
+The next step to an easy upgrade (ie: skipping manually applying all the commits since the project was created) is to try out a blank super-starter on another system to see if the tooling is the problem with this system in particular.
+
+
+
+
 ## Update to Ionic 3.X
 Following the instructions on [this page](https://forum.ionicframework.com/t/guide-how-to-update-to-ionic-3-x/87516).
 
