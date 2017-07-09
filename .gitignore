@@ -32,3 +32,11 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+
+
+# exclude images for copyright issues
+src/assets/img/exported/
+src/assets/i18n/
+
+
