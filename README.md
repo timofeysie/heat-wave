@@ -111,6 +111,62 @@ Removing the ```[options]="{pager: true}"``` from the tutorial.html page and the
 The next step to an easy upgrade (ie: skipping manually applying all the commits since the project was created) is to try out a blank super-starter on another system to see if the tooling is the problem with this system in particular.
 
 
+After this, the android platform was added, but the build failed.
+We are still on the old cli:
+```
+Cordova CLI: 7.0.1 
+Ionic Framework Version: 3.1.1
+Ionic CLI Version: 2.1.18
+Ionic App Lib Version: 2.1.9
+Ionic App Scripts Version: 1.3.6
+ios-deploy version: Not installed
+ios-sim version: Not installed
+OS: OS X Yosemite
+Node Version: v6.9.2
+Xcode version: Xcode 6.1.1 Build version 6A2008a
+```
+
+The notes for the cli say:
+*Please make sure latest Node 6 LTS and NPM 3+ are installed.*
+
+```
+$ npm --v
+3.10.9
+```
+
+Running ```npm install -g ionic@latest``` (with sudo for this mac).
+
+Then, try the build again:
+```
+ ionic cordova build android
+? Looks like this is an Ionic Angular project, would you like to install @ionic/cli-plugin-ionic-angular and continue? Yes
+> npm install --save-dev --save-exact @ionic/cli-plugin-ionic-angular@latest
+```
+
+Not sure what the cli-plugin-ionic-angular is.
+Their GitHub says *This CLI project plugin provides Ionic Angular functionality to the CLI.*
+
+What would happen if we said no to the question?
+Then there was another one:
+```
+? The plugin @ionic/cli-plugin-cordova is not installed. Would you like to install it and continue? Yes
+> npm install --save-dev --save-exact @ionic/cli-plugin-cordova@latest
+✔ Running command - done!
+```
+
+After this, the build fails:
+```
+[06:09:23]  lint finished in 55.34 s 
+✖ Running command - failed!
+[ERROR] Cordova encountered an error.
+        You may get more insight by running the Cordova command above directly.
+[ERROR] An error occurred while running cordova build android (exit code 1):        
+        ANDROID_HOME=/Users/tim/Library/Android/sdk
+        JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home
+        Error: spawn EACCES
+```
+
+
 
 
 ## Update to Ionic 3.X

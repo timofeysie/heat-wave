@@ -35,6 +35,7 @@ export class User {
    * the user entered on the form.
    */
   login(accountInfo: any) {
+    console.log('accountInfo',accountInfo);
     let seq = this.api.post('login', accountInfo).share();
 
     seq
