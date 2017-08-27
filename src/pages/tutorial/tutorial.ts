@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuController, NavController } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -39,7 +39,6 @@ export class TutorialPage {
                    'TUTORIAL_SLIDE9_DESCRIPTION',
     ])
     .subscribe((values) => {
-      console.log('Loaded values', values);
       this.slides = [
         {
           title: values.TUTORIAL_SLIDE1_TITLE,

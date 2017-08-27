@@ -166,8 +166,83 @@ After this, the build fails:
         Error: spawn EACCES
 ```
 
+After a few days coming back to this problem, the next time I ran ionic cordova build android, I was asked to update these:
+```
+@ionic/cli-plugin-cordova has an update available (1.4.1 => 1.6.2)
+@ionic/cli-plugin-ionic-angular has an update available (1.3.2 => 1.4.1)
+```
 
+The result then of the build:
+```
+[02:30:40]  build dev finished in 47.02 s 
+[WARN] Error occurred during command execution from a CLI plugin (@ionic/cli-plugin-cordova). Your plugins may be out of date.
+TypeError: env.runcmd is not a function
+QuinquenniumF:heat-wave tim$ [02:30:57]  tslint: src/pages/tutorial/tutorial.ts, line: 1 
+            Unused import: 'Injector' 
+       L1:  import { Component, Injector } from '@angular/core';
+       L2:  import { MenuController, NavController } from 'ionic-angular';
+[02:30:57]  tslint: src/app/app.module.ts, line: 1 
+            Unused import: 'Injectable' 
+       L1:  import { NgModule, ErrorHandler, Injectable } from '@angular/core';
+       L2:  import { BrowserModule } from '@angular/platform-browser';
+(node:41523) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: channel closed
+```
 
+The lint error is easy to fix.  Bear in mind this came with the Ionic super starter code out of the box.  Should we create a pull request for that?  It would most likely come from their base project, which is then used in the CLI build, so may not be an easy fix.
+
+Next, I the cli plugin had not been updated just before, you might wonder how to update that manually.  But for now, a Google search for ```env.runcmd is not a function```.
+
+The answer to [this SO question](https://stackoverflow.com/questions/45475362/during-building-ionic-app) states:
+
+*This error message indicates that the Ionic CLI version is incompatible with other CLI plugins (see https://github.com/ionic-team/ionic/issues/12561). Please run the following commands in your project directory (where you package.json is):*
+```
+npm i -g ionic@latest
+npm i --save-dev --save-exact ionic@latest
+```
+*This will install the latest Ionic CLI version (currently 3.7.0) globally and locally. After that the error should no longer occur.*
+
+Despite updating the last time working on this app a few weeks ago when we had ```Ionic CLI Version: 2.1.18``` as noted above, the new version is ```CLI 3.9```.
+Things change quickly in this front-end world!
+
+So the answer when doing ```ionic --info`` to this question was yes:
+```? The Ionic CLI can automatically check for CLI updates in the background. Would you like to enable this? Yes```
+
+So, without doing the second command up there, re-run the build and that error is gone.
+But there is still one last error:
+```
+✖ Running command - failed!
+[ERROR] An error occurred while running cordova build android (exit code 1):     
+        ANDROID_HOME=/Users/tim/Library/Android/sdk
+        JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home
+        Error: spawn EACCES
+```
+
+The old EACCES error!  So tried one answer from [this SO question](https://stackoverflow.com/questions/38767126/getting-error-spawn-eacces-while-ionic-build-android-in-ubuntu-14-04):
+```
+sudo chmod -R 777 /Users/tim/Library/Android/sdk
+```
+
+Then, running the build again:
+```
+$ ionic cordova build android
+[WARN] Detected @ionic/cli-plugin-cordova in your package.json.
+       As of CLI 3.8, it is no longer needed. You can uninstall it:
+       npm uninstall --save-dev --save-exact @ionic/cli-plugin-cordova
+[WARN] Detected @ionic/cli-plugin-ionic-angular in your package.json.
+       As of CLI 3.8, it is no longer needed. You can uninstall it:    
+       npm uninstall --save-dev --save-exact @ionic/cli-plugin-ionic-angular
+```
+Wait, these were the plugins that the CLI has been bugging us to update with each command for the past few months.  Maybe they got some feedback to just inline all that functionality?
+
+Anyhow, after that chmod, still same error.  
+
+Looking at [a Ionic Forum answer]():
+*I don't think it has anything to do with sudo - that command is simply missing the execute permission*
+```
+chmod +x hooks/after_prepare/010_add_platform_class.js
+```
+
+But this is for Ionic v1...
 
 ## Update to Ionic 3.X
 Following the instructions on [this page](https://forum.ionicframework.com/t/guide-how-to-update-to-ionic-3-x/87516).

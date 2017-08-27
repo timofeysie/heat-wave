@@ -3,33 +3,31 @@ page-tutorial {
     background: transparent;
     border-color: transparent;
   }
-
   .slide-zoom {
     height: 100%;
-    background-color: lightgray;
-  }
-
-  .slide-title {
-    margin-top: 2.8rem;
-  }
-
-  .slide-image {
-    max-height: 70%;
-    max-width: 60%;
-    margin: 36px 0;
     background-color: white;
   }
-
+  .slide-title {
+    position: relative;
+    top: -15px;
+    margin-top: 2.8rem;
+  }
+  .slide-image {
+    max-height: 70%;
+    max-width: 80%;
+    margin: 10px 0;
+    background-color: white;
+  }
   b {
     font-weight: 500;
   }
-
   p {
+    position: relative;
+    top: -15px;
     padding: 0 40px;
     font-size: 14px;
     line-height: 1.5;
     color: #60646B;
-
     b {
       color: #000000;
     }
