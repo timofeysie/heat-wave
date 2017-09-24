@@ -37,6 +37,10 @@ export class TutorialPage {
                    'TUTORIAL_SLIDE7_DESCRIPTION',
                    'TUTORIAL_SLIDE8_DESCRIPTION',
                    'TUTORIAL_SLIDE9_DESCRIPTION',
+                   'TUTORIAL_SLIDE10_DESCRIPTION',
+                   'TUTORIAL_SLIDE11_DESCRIPTION',
+                   'TUTORIAL_SLIDE12_DESCRIPTION',
+                   'TUTORIAL_SLIDE13_DESCRIPTION',
     ])
     .subscribe((values) => {
       this.slides = [
@@ -84,6 +88,26 @@ export class TutorialPage {
           title: null,
           description: values.TUTORIAL_SLIDE9_DESCRIPTION,
           image: 'assets/img/exported/page-9.png',
+        },
+        {
+          title: null,
+          description: values.TUTORIAL_SLIDE10_DESCRIPTION,
+          image: 'assets/img/exported/page-10.png',
+        },
+        {
+          title: null,
+          description: values.TUTORIAL_SLIDE11_DESCRIPTION,
+          image: 'assets/img/exported/page-11.png',
+        },
+        {
+          title: null,
+          description: values.TUTORIAL_SLIDE12_DESCRIPTION,
+          image: 'assets/img/exported/page-12.png',
+        },
+        {
+          title: null,
+          description: values.TUTORIAL_SLIDE13_DESCRIPTION,
+          image: 'assets/img/exported/page-13.png',
         }
       ];
     });
